@@ -7,8 +7,8 @@ using FevalAWSApiPersonas.Models;
 using Newtonsoft.Json;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
-//[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
-[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
+[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
+//[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
 namespace FevalAWSApiPersonas;
 
@@ -33,12 +33,6 @@ public class Functions
         context.Logger.LogInformation("Handling the 'Get' Request");
 
         string jsonPersonas = JsonConvert.SerializeObject(this.personasList);
-        var response = new
-        {
-            StatusCode = 200,
-            Body = jsonPersonas
-        };
-
-        return HttpResults.Ok(response);
+        return HttpResults.Ok(jsonPersonas);
     }
 }
